@@ -1,7 +1,7 @@
 var React = require('react');
 
 var Artist = React.createClass({
-    render: function() {
+    render() {
       return (
         <li>
           {this.props.data}
@@ -11,7 +11,7 @@ var Artist = React.createClass({
 });
 
 var Cover = React.createClass({
-    render: function() {
+    render() {
         return(
             <img src={this.props.data['#text']} />
         )
@@ -20,11 +20,11 @@ var Cover = React.createClass({
 
 var Event = React.createClass({
 
-  formatDate: function () {
+  formatDate() {
     return new Date(this.props.data.startDate).toLocaleDateString();
   },
 
-  getImage: function () {
+  getImage() {
     var img = this.props.data.image.filter(function(image) {
       return image.size == 'large';
     });
@@ -32,7 +32,7 @@ var Event = React.createClass({
     return <Cover data={img[0]} />;
   },
 
-  render: function() {
+  render() {
     var artistNodes;
 
     if (Array.isArray(this.props.data.artists.artist)) {

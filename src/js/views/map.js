@@ -1,7 +1,7 @@
 var React = require('react');
 
 var Map = React.createClass({
-  render: function() {
+  render() {
     return (
       <div>
         Map

@@ -3,7 +3,7 @@ var Router = require('react-router');
 var Link = Router.Link;
 
 var Navigation = React.createClass({
-  render: function () {
+  render() {
     return (
       <nav>
         <ul>
