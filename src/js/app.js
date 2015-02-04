@@ -18,7 +18,7 @@ var Header = require('./views/components/header.js');
 var Navigation = require('./views/components/navigation.js');
 
 var App = React.createClass({
-  render: function () {
+  render() {
     return (
       <div>
         <Header />
@@ -34,6 +34,7 @@ var routes = (
     <Route handler={App} path="/">
         <DefaultRoute handler={List} />
         <Route name="list" handler={List} />
+          <Route name="list-paginate" path="/list/:page" handler={List} />
         <Route name="map" handler={Map} />
     </Route>
 );
