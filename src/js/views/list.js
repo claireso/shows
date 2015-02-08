@@ -53,7 +53,7 @@ var EventList = React.createClass({
     }
 
     return (
-      <div className="eventList">
+      <div className="row event-list">
         {eventNodes}
         {pagination}
       </div>

@@ -5,16 +5,18 @@ var Link = Router.Link;
 var Navigation = React.createClass({
   render() {
     return (
-      <nav>
-        <ul>
-          <li>
-            <Link to="list">List</Link>
-          </li>
-          <li>
-            <Link to="map">Map</Link>
-          </li>
-        </ul>
-      </nav>
+      <div className="row">
+        <nav className="nav">
+          <ul>
+            <li>
+              <Link to="list">Liste</Link>
+            </li>
+            <li>
+              <Link to="map">Map</Link>
+            </li>
+          </ul>
+        </nav>
+      </div>
     );
   }
 });

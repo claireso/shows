@@ -26,7 +26,7 @@ var Event = React.createClass({
 
   getImage() {
     var img = this.props.data.image.filter(function(image) {
-      return image.size == 'large';
+      return image.size == 'extralarge';
     });
 
     return <Cover data={img[0]} />;
@@ -48,11 +48,19 @@ var Event = React.createClass({
 
     return (
       <div className="event">
-        Title: {this.props.data.title} <br />
-        Venue: {this.props.data.venue.name} <br />
-        Date: {this.formatDate()} <br />
-        Artists: <ul>{artistNodes}</ul>
-        Image: {this.getImage()}
+        <div className="event__cover">
+          {this.getImage()}
+        </div>
+        <div className="event__infos">
+          <h1 className="event__title">{this.props.data.title}</h1>
+          <div className="event__date__venue">
+            {this.formatDate()} / {this.props.data.venue.name}
+          </div>
+          <div className="event__artists">
+            Artistes:
+              <ul>{artistNodes}</ul>
+          </div>
+        </div>
       </div>
     );
   }

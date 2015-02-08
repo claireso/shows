@@ -1,0 +1,40 @@
+.event
+    border: 1px solid $color-border
+    margin:0 0 1em
+    display: table
+    width: 100%
+
+    > div
+        display: table-cell
+        vertical-align: top
+        padding: 10px
+
+    &__cover
+        width: 252px
+
+        img
+            display: block
+
+    &__title
+        margin: -5px 0 0
+        font-weight: 600
+        font-size: rem(20px)
+        text-transform: uppercase
+
+    &__date__venue
+        margin: 5px 0
+        color: $color-event-infos
+
+    &__artists
+        ul
+            margin: 10px 0
+            padding:0 0 0 20px
+            list-style-type: none
+
+            li:before
+                content: '-'
+                display: inline-block
+                margin: 0 5px 0 0
+
+
+
