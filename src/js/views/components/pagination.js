@@ -10,13 +10,13 @@ var Pagination = React.createClass({
         next;
 
     if (page > 1) {
-        var p = page - 1;
-        previous = <Link to="list-paginate" params={{page: p}}>«</Link>
+      var p = page - 1;
+      previous = <Link to="list-paginate" params={{page: p}}>«</Link>
     }
 
     if (page < +this.props.data.totalPages) {
-        var p = page + 1;
-        next = <Link to="list-paginate" params={{page: p}}>»</Link>
+      var p = page + 1;
+      next = <Link to="list-paginate" params={{page: p}}>»</Link>
     }
 
     return (

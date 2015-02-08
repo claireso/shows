@@ -28,14 +28,13 @@ var App = React.createClass({
   }
 });
 
-
 var routes = (
-    <Route handler={App} path="/">
-        <DefaultRoute handler={List} />
-        <Route name="list" handler={List} />
-          <Route name="list-paginate" path="/list/:page" handler={List} />
-        <Route name="favorites" handler={Favorites} />
-    </Route>
+  <Route handler={App} path="/">
+    <DefaultRoute handler={List} />
+    <Route name="list" handler={List} />
+      <Route name="list-paginate" path="/list/:page" handler={List} />
+    <Route name="favorites" handler={Favorites} />
+  </Route>
 );
 
 //Start app
