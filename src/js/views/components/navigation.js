@@ -12,7 +12,7 @@ var Navigation = React.createClass({
               <Link to="list">Liste</Link>
             </li>
             <li>
-              <Link to="map">Map</Link>
+              <Link to="favorites">Favoris</Link>
             </li>
           </ul>
         </nav>
