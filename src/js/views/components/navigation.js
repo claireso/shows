@@ -9,10 +9,10 @@ var Navigation = React.createClass({
         <nav className="nav">
           <ul>
             <li>
-              <Link to="list">Liste</Link>
+              <Link activeClassName="is-active" to="list">Liste</Link>
             </li>
             <li>
-              <Link to="favorites">Favoris</Link>
+              <Link activeClassName="is-active" to="favorites">Favoris</Link>
             </li>
           </ul>
         </nav>

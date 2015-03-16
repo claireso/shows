@@ -1,7 +1,7 @@
 var React = require('react');
 var Router = require('react-router');
 
-var { Route, DefaultRoute, RouteHandler, Link } = Router;
+var { Route, DefaultRoute, RouteHandler, Link, Redirect, NotFoundRoute } = Router;
 // var Route = Router.Route;
 // var NotFoundRoute = Router.NotFoundRoute;
 // var DefaultRoute = Router.DefaultRoute;
@@ -30,10 +30,10 @@ var App = React.createClass({
 
 var routes = (
   <Route handler={App} path="/">
-    <DefaultRoute handler={List} />
     <Route name="list" handler={List} />
       <Route name="list-paginate" path="/list/:page" handler={List} />
     <Route name="favorites" handler={Favorites} />
+    <Redirect path="*" to="list" />
   </Route>
 );
 
