@@ -1,0 +1,8 @@
+const constantes = {
+  EVENT_LOAD: 'EVENT_LOAD',
+  EVENT_LOAD_FROM_LOCAL: 'EVENT_LOAD_FROM_LOCAL',
+  EVENT_SAVE: 'EVENT_SAVE',
+  EVENT_DESTROY: 'EVENT_DESTROY'
+};
+
+export default constantes;

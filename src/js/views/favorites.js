@@ -1,28 +1,35 @@
 import React from 'react';
 import Event from './components/event.js';
 
+import EventActions from '../actions/';
+import EventLocalStore from '../stores/eventLocalStorage.js';
+
 var Favoris = React.createClass({
   getInitialState() {
     return {data: []};
   },
 
   componentDidMount() {
-    this.loadShows();
+    EventActions.loadAllFromLocal();
   },
 
-  loadShows() {
-    var fav = localStorage.getItem('shows');
+  componentWillMount() {
+    EventLocalStore.on('loaded', this.onLoaded);
+  },
 
-    if (fav) {
-      fav = JSON.parse(fav);
-      this.setState({'data': fav});
-    }
+  componentWillUnmount() {
+    EventLocalStore.removeListener('loaded', this.onLoaded);
+  },
+
+  onLoaded() {
+    var events = EventLocalStore.getAll();
+    this.setState({'data': events});
   },
 
   render() {
     var eventNodes = this.state.data.map(function(event, index) {
       return (
-          <Event key={index} data={event} afterClick={this.loadShows} />
+          <Event key={index} data={event} view="favorites" />
       );
     }.bind(this));
 

@@ -1,9 +1,11 @@
 import React from 'react';
-import Event from './components/event.js';
-import Pagination from './components/pagination.js';
 import {State} from 'react-router';
 
-var api = 'http://ws.audioscrobbler.com/2.0/';
+import Event from './components/event.js';
+import Pagination from './components/pagination.js';
+
+import EventActions from '../actions/';
+import EventStore from '../stores/event.js';
 
 var EventList = React.createClass({
 
@@ -13,36 +15,43 @@ var EventList = React.createClass({
     return {data: []};
   },
 
+  componentWillMount() {
+    EventStore.on('loaded', this.onLoaded);
+  },
+
+  componentWillUnmount() {
+    EventStore.removeListener('loaded', this.onLoaded);
+  },
+
   componentDidMount() {
-    this.loadEvents();
+    this.loadAll();
   },
 
   componentWillReceiveProps() {
-    this.loadEvents();
+    this.loadAll();
   },
 
-  loadEvents() {
-    var self = this,
-        xhr = new XMLHttpRequest(),
-        page = this.getParams().page || 1;
+  loadAll() {
+    EventActions.loadAll({
+      page: this.getParams().page || 1
+    });
+    EventActions.loadAllFromLocal();
+  },
 
-    xhr.open('GET', api + '?method=geo.getevents&location=paris&page=' + page + '&format=json&api_key=d410ba5107086df95100d7d39248f769', true);
+  onLoaded() {
+    var events = EventStore.getAll();
 
-    xhr.onreadystatechange = function(e) {
-      if (this.readyState == 4 && this.status == 200) {
-        var data = JSON.parse(this.responseText);
-        self.setState({data: data.events.event, pagination: data.events['@attr']});
-      }
-    };
+    if (this.isMounted()) {
+      this.setState({data: events.events.event, pagination: events.events['@attr']});
+    }
 
-    xhr.send();
   },
 
   render() {
 
     var eventNodes = this.state.data.map(function(event, index) {
       return (
-        <Event key={index} data={event} />
+        <Event key={index} data={event} view="list" />
       );
     });
 

@@ -1,5 +1,8 @@
 import React from 'react';
 
+import EventActions from '../../actions/';
+import EventLocalStore from '../../stores/eventLocalStorage.js';
+
 var Artist = React.createClass({
   render() {
     return (
@@ -24,60 +27,42 @@ var ButtonFavoris = React.createClass({
     return {label: 'Ajouter aux favoris'};
   },
 
-  getShows() {
-    var shows = localStorage.getItem('shows');
-
-    if (shows) {
-      shows = JSON.parse(shows);
-    }
-
-    return shows || [];
+  componentWillMount() {
+    EventLocalStore.on('save', this.onSave);
+    EventLocalStore.on('destroy', this.onDestroy);
   },
 
-  setShows(shows) {
-    localStorage.setItem('shows', JSON.stringify(shows));
-  },
-
-  isInLocalStorage() {
-    var shows = this.getShows();
-
-    var show = shows.filter(function(s){
-      return s.id == this.props.data.id;
-    }.bind(this));
-
-    return show.length;
-  },
-
-  setInLocalStorage() {
-    var shows = this.getShows();
-
-    shows.push( this.props.data );
-    this.setShows(shows);
-    this.setState({'label': 'Retirer des favoris' });
-  },
-
-  removeFromLocalStorage() {
-    var shows, pos;
-
-    shows = this.getShows();
-    pos = shows.map(function(show) { return show.id; }).indexOf(this.props.data.id);
-
-    shows.splice(pos, 1);
-    this.setShows(shows);
-    this.setState({'label': 'Ajouter aux favoris' });
+  componentWillUnmount() {
+    EventLocalStore.removeListener('save', this.onSave);
+    EventLocalStore.removeListener('destroy', this.onDestroy);
   },
 
   componentDidMount() {
-    if (this.isInLocalStorage()) {
+    var event = EventLocalStore.get(this.props.data.id);
+    if (event) {
       this.setState({'label': 'Retirer des favoris' });
     }
   },
 
   handleClick() {
-    this[ !this.isInLocalStorage() ? 'setInLocalStorage' : 'removeFromLocalStorage' ]();
+    var event = EventLocalStore.get(this.props.data.id);
+    EventActions[!event ? 'save' : 'destroy'](this.props.data);
 
-    if(this.props.afterClick) {
-      this.props.afterClick();
+    if('favorites' == this.props.view) {
+      //refresh view
+      EventActions.loadAllFromLocal();
+    }
+  },
+
+  onSave(event) {
+    if (event.id == this.props.data.id) {
+      this.setState({'label': 'Retirer des favoris' });
+    }
+  },
+
+  onDestroy(event) {
+    if (event.id == this.props.data.id) {
+      this.setState({'label': 'Ajouter aux favoris' });
     }
   },
 
@@ -130,7 +115,7 @@ var Event = React.createClass({
             Artistes:
               <ul>{artistNodes}</ul>
           </div>
-          <ButtonFavoris key={this.props.data.id} data={this.props.data} afterClick={this.props.afterClick} />
+          <ButtonFavoris key={this.props.data.id} data={this.props.data} view={this.props.view} />
         </div>
       </div>
     );
