@@ -1,6 +1,5 @@
-var React = require('react');
-var Router = require('react-router');
-var Link = Router.Link;
+import React from 'react';
+import {Link} from 'react-router';
 
 var Navigation = React.createClass({
   render() {
@@ -21,4 +20,4 @@ var Navigation = React.createClass({
   }
 });
 
-module.exports = Navigation;
+export default Navigation;

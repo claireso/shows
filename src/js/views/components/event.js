@@ -1,4 +1,4 @@
-var React = require('react');
+import React from 'react';
 
 var Artist = React.createClass({
   render() {
@@ -137,4 +137,4 @@ var Event = React.createClass({
   }
 });
 
-module.exports = Event;
+export default Event;

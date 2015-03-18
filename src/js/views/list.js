@@ -1,9 +1,9 @@
-var React = require('react');
+import React from 'react';
+import Event from './components/event.js';
+import Pagination from './components/pagination.js';
+import {State} from 'react-router';
 
 var api = 'http://ws.audioscrobbler.com/2.0/';
-var Event = require('./components/event.js');
-var Pagination = require('./components/pagination.js');
-var {State} = require('react-router');
 
 var EventList = React.createClass({
 
@@ -61,4 +61,4 @@ var EventList = React.createClass({
   }
 });
 
-module.exports = EventList;
+export default EventList;

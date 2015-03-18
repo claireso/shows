@@ -1,5 +1,5 @@
-var React = require('react');
-var Event = require('./components/event.js');
+import React from 'react';
+import Event from './components/event.js';
 
 var Favoris = React.createClass({
   getInitialState() {
@@ -38,4 +38,4 @@ var Favoris = React.createClass({
   }
 });
 
-module.exports = Favoris;
+export default Favoris;
