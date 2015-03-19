@@ -16,17 +16,19 @@ var EventActions = {
     })
   },
 
-  save(param) {
+  save(param, callback) {
     AppDispatcher.handleViewAction({
       action: EventConstants.EVENT_SAVE,
-      param: param
+      param: param,
+      callback: callback
     })
   },
 
-  destroy(param) {
+  destroy(param, callback) {
     AppDispatcher.handleViewAction({
       action: EventConstants.EVENT_DESTROY,
-      param: param
+      param: param,
+      callback: callback
     })
   }
 

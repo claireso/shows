@@ -11,7 +11,8 @@ class EventLocalStore extends EventEmitter {
 
     this.dispatcherIndex = AppDispatcher.register(function(payload) {
       var action = payload.action,
-          param = payload.param;
+          param = payload.param,
+          callback = payload.callback;
 
       switch(action) {
         case EventConstants.EVENT_LOAD_FROM_LOCAL:
@@ -19,11 +20,11 @@ class EventLocalStore extends EventEmitter {
           break;
 
         case EventConstants.EVENT_SAVE:
-          this.save(param);
+          this.save(param, callback);
           break;
 
         case EventConstants.EVENT_DESTROY:
-          this.destroy(param);
+          this.destroy(param, callback);
           break;
 
       }
@@ -56,22 +57,22 @@ class EventLocalStore extends EventEmitter {
     return event[0];
   }
 
-  save(event) {
+  save(event, callback) {
     var events = this.getAll();
 
     events.push( event );
     localStorage.setItem('shows', JSON.stringify(events));
-    this.emit('save', event);
+    callback(event);
   }
 
-  destroy(event) {
+  destroy(event, callback) {
     var events, pos;
 
     events = this.getAll();
     pos = events.map(function(event) { return event.id; }).indexOf(event.id);
     events.splice(pos, 1);
     localStorage.setItem('shows', JSON.stringify(events));
-    this.emit('destroy', event);
+    callback(event);
   }
 
 };

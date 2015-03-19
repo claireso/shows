@@ -27,16 +27,6 @@ var ButtonFavoris = React.createClass({
     return {label: 'Ajouter aux favoris'};
   },
 
-  componentWillMount() {
-    EventLocalStore.on('save', this.onSave);
-    EventLocalStore.on('destroy', this.onDestroy);
-  },
-
-  componentWillUnmount() {
-    EventLocalStore.removeListener('save', this.onSave);
-    EventLocalStore.removeListener('destroy', this.onDestroy);
-  },
-
   componentDidMount() {
     var event = EventLocalStore.get(this.props.data.id);
     if (event) {
@@ -45,8 +35,9 @@ var ButtonFavoris = React.createClass({
   },
 
   handleClick() {
-    var event = EventLocalStore.get(this.props.data.id);
-    EventActions[!event ? 'save' : 'destroy'](this.props.data);
+    var event = EventLocalStore.get(this.props.data.id),
+        callback = !event ? this.onSave : this.onDestroy ;
+    EventActions[!event ? 'save' : 'destroy'](this.props.data, callback);
 
     if('favorites' == this.props.view) {
       //refresh view
@@ -55,15 +46,11 @@ var ButtonFavoris = React.createClass({
   },
 
   onSave(event) {
-    if (event.id == this.props.data.id) {
-      this.setState({'label': 'Retirer des favoris' });
-    }
+    this.setState({'label': 'Retirer des favoris' });
   },
 
   onDestroy(event) {
-    if (event.id == this.props.data.id) {
-      this.setState({'label': 'Ajouter aux favoris' });
-    }
+    this.setState({'label': 'Ajouter aux favoris' });
   },
 
   render() {
