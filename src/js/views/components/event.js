@@ -36,7 +36,8 @@ var ButtonFavoris = React.createClass({
 
   handleClick() {
     var event = EventLocalStore.get(this.props.data.id),
-        callback = !event ? this.onSave : this.onDestroy ;
+        callback = !event ? this.onSave : this.onDestroy;
+
     EventActions[!event ? 'save' : 'destroy'](this.props.data, callback);
 
     if('favorites' == this.props.view) {
@@ -78,7 +79,7 @@ var Event = React.createClass({
     var artistNodes;
 
     if (Array.isArray(this.props.data.artists.artist)) {
-      artistNodes = this.props.data.artists.artist.map(function(artist, index) {
+      artistNodes = this.props.data.artists.artist.map((artist, index) => {
         return (
           <Artist key={index} data={artist} />
         );

@@ -11,9 +11,8 @@ class EventStore extends EventEmitter {
 
     this.data = {};
 
-    this.dispatcherIndex = AppDispatcher.register(function(payload) {
-      var action = payload.action,
-          param = payload.param;
+    this.dispatcherIndex = AppDispatcher.register((payload) => {
+      var {action, param} = payload;
 
       switch(action) {
         case EventConstants.EVENT_LOAD:
@@ -22,7 +21,7 @@ class EventStore extends EventEmitter {
       }
 
       return true;
-    }.bind(this))
+    })
   }
 
   loadAll(param) {

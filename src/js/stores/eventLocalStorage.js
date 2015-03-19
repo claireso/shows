@@ -9,10 +9,8 @@ class EventLocalStore extends EventEmitter {
 
     this.data = [];
 
-    this.dispatcherIndex = AppDispatcher.register(function(payload) {
-      var action = payload.action,
-          param = payload.param,
-          callback = payload.callback;
+    this.dispatcherIndex = AppDispatcher.register((payload) => {
+      var {action, param, callback } = payload;
 
       switch(action) {
         case EventConstants.EVENT_LOAD_FROM_LOCAL:
@@ -26,7 +24,6 @@ class EventLocalStore extends EventEmitter {
         case EventConstants.EVENT_DESTROY:
           this.destroy(param, callback);
           break;
-
       }
 
       return true;
@@ -55,9 +52,7 @@ class EventLocalStore extends EventEmitter {
   get(id) {
     var events = this.getAll();
 
-    var event = events.filter(function(s){
-      return s.id == id;
-    }.bind(this));
+    var event = events.filter((localEvent) => localEvent.id == id);
 
     return event[0];
   }
@@ -69,7 +64,7 @@ class EventLocalStore extends EventEmitter {
 
     timestamp = +new Date(event.startDate);
 
-    events.some(function(localEvent, index){
+    events.some((localEvent, index) => {
       if (timestamp < +new Date(localEvent.startDate)) {
         insertAt = index;
         return true;
@@ -85,7 +80,8 @@ class EventLocalStore extends EventEmitter {
     var events, pos;
 
     events = this.getAll();
-    pos = events.map(function(event) { return event.id; }).indexOf(event.id);
+
+    pos = events.map((event) => event.id).indexOf(event.id);
     events.splice(pos, 1);
     this.updateAll(events);
     callback(event);

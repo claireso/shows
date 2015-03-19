@@ -27,11 +27,11 @@ var Favoris = React.createClass({
   },
 
   render() {
-    var eventNodes = this.state.data.map(function(event, index) {
+    var eventNodes = this.state.data.map((event, index) => {
       return (
           <Event key={index} data={event} view="favorites" />
       );
-    }.bind(this));
+    });
 
     if(!eventNodes.length) {
       eventNodes = 'Vous n‘avez pas encore ajouté de favoris';

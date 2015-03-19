@@ -49,7 +49,7 @@ var EventList = React.createClass({
 
   render() {
 
-    var eventNodes = this.state.data.map(function(event, index) {
+    var eventNodes = this.state.data.map((event, index) => {
       return (
         <Event key={index} data={event} view="list" />
       );

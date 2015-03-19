@@ -4,6 +4,6 @@ import Router from 'react-router';
 import routes from './routes/';
 
 //Start app
-Router.run(routes, function (Handler) {
+Router.run(routes, (Handler) => {
   React.render(<Handler/>, document.body);
 });
