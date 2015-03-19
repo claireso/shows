@@ -43,6 +43,11 @@ class EventLocalStore extends EventEmitter {
 
   }
 
+  updateAll(events) {
+    localStorage.setItem('shows', JSON.stringify(events));
+    this.data = events;
+  }
+
   getAll() {
     return this.data;
   }
@@ -58,10 +63,21 @@ class EventLocalStore extends EventEmitter {
   }
 
   save(event, callback) {
-    var events = this.getAll();
+    var events = this.getAll(),
+        insertAt = events.length,
+        timestamp;
 
-    events.push( event );
-    localStorage.setItem('shows', JSON.stringify(events));
+    timestamp = +new Date(event.startDate);
+
+    events.some(function(localEvent, index){
+      if (timestamp < +new Date(localEvent.startDate)) {
+        insertAt = index;
+        return true;
+      }
+    });
+
+    events.splice(insertAt, 0, event );
+    this.updateAll(events);
     callback(event);
   }
 
@@ -71,7 +87,7 @@ class EventLocalStore extends EventEmitter {
     events = this.getAll();
     pos = events.map(function(event) { return event.id; }).indexOf(event.id);
     events.splice(pos, 1);
-    localStorage.setItem('shows', JSON.stringify(events));
+    this.updateAll(events);
     callback(event);
   }
 
