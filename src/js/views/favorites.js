@@ -1,4 +1,17 @@
-import React from 'react';
+import React, {Component} from 'react';
+
+class Favorites extends Component {
+    render() {
+        return (
+            <div>Favorites</div>
+        );
+    }
+}
+
+export default Favorites;
+
+
+/*import React from 'react';
 import Event from './components/event.js';
 
 import EventActions from '../actions/';
@@ -45,4 +58,4 @@ var Favoris = React.createClass({
   }
 });
 
-export default Favoris;
+export default Favoris;*/

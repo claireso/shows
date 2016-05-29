@@ -1,5 +1,18 @@
-import React from 'react';
-import {State} from 'react-router';
+import React, {Component} from 'react';
+
+class List extends Component {
+    render() {
+        return (
+            <div>List</div>
+        )
+    }
+}
+
+export default List;
+
+
+
+/*import {State} from 'react-router';
 
 import Event from './components/event.js';
 import Pagination from './components/pagination.js';
@@ -70,4 +83,4 @@ var EventList = React.createClass({
   }
 });
 
-export default EventList;
+export default EventList;*/

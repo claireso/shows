@@ -8,6 +8,7 @@ var api = 'http://ws.audioscrobbler.com/2.0/';
 class EventStore extends EventEmitter {
 
   constructor() {
+    super();
 
     this.data = {};
 
@@ -29,7 +30,7 @@ class EventStore extends EventEmitter {
         xhr = new XMLHttpRequest(),
         page = param.page;
 
-    xhr.open('GET', api + '?method=geo.getevents&location=paris&page=' + page + '&format=json&api_key=d410ba5107086df95100d7d39248f769', true);
+    xhr.open('GET', api + '?method=geo.gettopartists&country=france&page=' + page + '&format=json&api_key=d410ba5107086df95100d7d39248f769', true);
 
     xhr.onreadystatechange = function(e) {
       if (this.readyState == 4 && this.status == 200) {

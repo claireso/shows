@@ -1,19 +1,18 @@
 import React from 'react';
-import Router from 'react-router';
+import {Route, IndexRedirect} from 'react-router';
 
-var { Route, DefaultRoute, RouteHandler, Link, Redirect, NotFoundRoute } = Router;
+//var { Route, DefaultRoute, RouteHandler, Link, Redirect, NotFoundRoute } = Router;
 
 //Views
-import List from '../views/list.js';
-import Favorites from '../views/favorites.js';
-import App from '../views/main.js';
+import List from '../views/list';
+import Favorites from '../views/favorites';
+import App from '../views/main';
 
 var routes = (
-  <Route handler={App} path="/">
-    <Route name="list" handler={List} />
-      <Route name="list-paginate" path="/list/:page" handler={List} />
-    <Route name="favorites" handler={Favorites} />
-    <Redirect path="*" to="list" />
+  <Route component={App} path="/">
+    <IndexRedirect to="/list" />
+    <Route path="list" component={List} />
+    <Route path="favorites" component={Favorites} />
   </Route>
 );
 

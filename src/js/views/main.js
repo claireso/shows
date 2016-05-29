@@ -1,22 +1,22 @@
-import React from 'react';
-import Router from 'react-router';
+import React, {Component} from 'react';
+//import Router from 'react-router';
 
-var { RouteHandler } = Router;
+//var { RouteHandler } = Router;
 
 //Components
-import Header from './components/header.js';
-import Navigation from './components/navigation.js';
+import Header from './components/header';
+import Navigation from './components/navigation';
 
-var App = React.createClass({
+class App extends Component {
   render() {
     return (
       <div>
         <Header />
         <Navigation />
-        <RouteHandler/>
+       {this.props.children}
       </div>
     );
   }
-});
+};
 
 export default App;

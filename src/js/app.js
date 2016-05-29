@@ -1,9 +1,13 @@
+import '../css/styles.styl';
 import React from 'react';
-import Router from 'react-router';
+import {render} from 'react-dom';
+import { Router, browserHistory } from 'react-router'
 
 import routes from './routes/';
 
 //Start app
-Router.run(routes, (Handler) => {
-  React.render(<Handler/>, document.body);
-});
+render((
+    <Router history={browserHistory}>
+        {routes}
+    </Router>
+), document.querySelector('#app'));

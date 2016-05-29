@@ -1,4 +1,4 @@
-import {Dispatcher} from 'flux';
+/*import {Dispatcher} from 'flux';
 
 
 class AppDispatcher extends Dispatcher {
@@ -9,4 +9,4 @@ class AppDispatcher extends Dispatcher {
 
 }
 
-export default new AppDispatcher();
+export default new AppDispatcher();*/
